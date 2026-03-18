@@ -1,0 +1,5 @@
+# Define the Sensor I2C address and dimensions
+I2C_SENSOR_ADDR = 0x44
+I2C_SENSOR_SDA_PIN=2 #pin GP2 - I2C1 SDA
+I2C_SENSOR_SCL_PIN=3 #pin GP3 - I2C1 SSCL
+I2C_SENSOR_FREQ=100000 #Hz
