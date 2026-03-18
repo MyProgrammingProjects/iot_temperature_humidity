@@ -125,5 +125,71 @@ Next Goals:
 
 
 
+**Query example**
 
+```SQL
 
+SELECT 
+c.Body.device, 
+c.Body.room, 
+c.Body.year, 
+c.Body.month,
+c.Body.day, 
+c.Body.hour, 
+c.Body.minutes, 
+c.Body.seconds, 
+c.Body.temperature["value"] as 'temperature', 
+c.Body.humidity["value"] as 'humidity' 
+FROM c 
+WHERE 1=1 
+AND c.Body.year=year(GetCurrentDateTime()) 
+AND c.Body.month=month(GetCurrentDateTime()) 
+AND c.Body.day = day(GetCurrentDateTime())
+--and c.Body.room = 'Anexo'
+--and c.Body.room = 'Sala'
+--and c.Body.room = 'Quarto'
+order by c.DateTime desc
+```
+
+**Example of a saved MQTT message**
+
+```json
+{
+    "id": "8205d094-28a3-4c37-a378-198b2d1e0eea",
+    "year": "2025",
+    "Properties": {},
+    "SystemProperties": {
+        "<hidden>-connection-device-id": "<hidden>",
+        "<hidden>-connection-auth-method": "{\"scope\":\"device\",\"type\":\"CA-Signed\",\"issuer\":\"<hidden>\"}",
+        "<hidden>-connection-auth-generation-id": "638772372462072025",
+        "<hidden>-content-type": "application/json;charset=utf-8",
+        "<hidden>-enqueuedtime": "2025-03-22T15:16:04.2760000Z",
+        "<hidden>-message-source": "Telemetry"
+    },
+    "iothub-name": "<hidden>",
+    "Body": {
+        "day": 22,
+        "minutes": 16,
+        "hour": 15,
+        "seconds": 4,
+        "temperature": {
+            "value": 25,
+            "unit": "Celcius"
+        },
+        "humidity": {
+            "value": 65.6,
+            "unit": "Percentage"
+        },
+        "device": "<hidden>",
+        "month": 3,
+        "room": "Anexo",
+        "year": 2025,
+        "dataType": "TemperatureHumidity"
+    },
+    "_rid": "tfgzAPKPk0oGAAAAAAAAAA==",
+    "_self": "dbs/tfgzAA==/colls/tfgzAPKPk0o=/docs/tfgzAPKPk0oGAAAAAAAAAA==/",
+    "_etag": "\"c9004f4c-0000-0d00-0000-67ded4340000\"",
+    "_attachments": "attachments/",
+    "_ts": 1742656564
+}
+```
